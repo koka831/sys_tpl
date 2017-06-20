@@ -97,15 +97,39 @@ errExitEN(int errnum, const char *format, ...)
 void
 fatal(const char *format, ...)
 {
+    va_list argList;
+    va_start(argList, format);
+    outputError(FALSE, 0, TRUE, format, argList);
+    va_end(argList);
 
+    terminate(TRUE);
 }
 
 void usageErr(const char *format, ...)
 {
+    va_list argList;
 
+    fflush(stdout);
+
+    fprintf(stderr, "");
+    va_start(argList, format);
+    vfprintf(stderr, format, argList);
+    va_end(argList);
+
+    fflush(stderr);
+    exit(EXIT_FAILURE);
 }
 
 void cmdLineErr(const char *format, ...)
 {
+    va_list argList;
 
+    fflush(stdout);
+    fprintf(stderr, "");
+    va_start(argList, format);
+    vfprintf(stderr, format, argList);
+    va_end(argList);
+
+    fflush(stderr);
+    exit(EXIT_FAILURE);
 }
