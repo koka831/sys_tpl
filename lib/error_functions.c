@@ -2,6 +2,8 @@
 #include "error_functions.h"
 #include "tlpi_hdr.h"
 
+#include "ename.c.inc"
+
 #ifdef __GNUC__
 __attribute__ ((__noreturn__))
 #endif
@@ -84,7 +86,12 @@ err_exit(const char *format, ...)
 void
 errExitEN(int errnum, const char *format, ...)
 {
+    va_list argList;
+    va_start(argList, format);
+    outputError(TRUE, errnum, TRUE, format, argList);
+    va_end(argList);
 
+    terminate(TRUE);
 }
 
 void
