@@ -1,0 +1,11 @@
+[package]
+authors = ["koka <koka.code@gmail.com>"]
+name = "c_if"
+version = "0.1.0"
+build = "build.rs"
+
+[build-dependencies]
+gcc = "*"
+
+[dependencies]
+libc = "0.2.24"
